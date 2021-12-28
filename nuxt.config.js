@@ -31,7 +31,13 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  // Issue: https://github.com/nuxt/nuxt.js/issues/8851#issuecomment-781351562
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
 
   // Pass your Google Analytics ID
   googleAnalytics: {
@@ -57,6 +63,7 @@ export default {
       id: 'hjid', 
       sv: 'hjsv',
     }],
+    '@nuxtjs/i18n'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -72,11 +79,24 @@ export default {
     }
   },
 
+  i18n: {
+    locales: [
+      { code: 'en', file: 'en-US.js', name: 'EN' },
+      { code: 'pt', file: 'pt-BR.js', name: 'PT' },
+    ],
+    defaultLocale: 'pt',
+    vueI18n: {
+      fallbackLocale: 'pt',
+    },
+    lazy: true,
+    langDir: 'lang/',
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
